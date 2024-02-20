@@ -1,0 +1,38 @@
+{
+  "version": "5",
+  "dialect": "sqlite",
+  "id": "0b57cc00-b4be-46af-aef1-58359ce082ca",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "tables": {
+    "bottable": {
+      "name": "bottable",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "amount": {
+          "name": "amount",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": 0
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  }
+}

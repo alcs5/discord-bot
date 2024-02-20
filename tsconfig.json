@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "typeRoots": ["/src/types/discord.d.ts"],
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+        "target": "ES2022",
+        "sourceMap": true,
+        "outDir": "dist"
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": ["dist"]
+}
