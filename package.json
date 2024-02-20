@@ -1,0 +1,26 @@
+{
+  "name": "testing",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node .",
+    "starteverything": "pnpm build && pnpm run deploy && pnpm start",
+    "deploy": "node dist/deploy-commands.js",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/better-sqlite3": "^7.6.9",
+    "@types/node": "^20.11.19",
+    "better-sqlite3": "^9.4.1",
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.4.4",
+    "drizzle-kit": "^0.20.14",
+    "drizzle-orm": "^0.29.3"
+  }
+}
