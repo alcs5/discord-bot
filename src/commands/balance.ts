@@ -15,7 +15,7 @@ const command = {
 
         const embed = new EmbedBuilder()
         .setColor(0x00ee00)
-        .setDescription(`you got ${currentAmount[0]?.amount || 0} coins!`);
+        .setDescription(`you have ${currentAmount[0]?.amount || 0} coins!`);
 
         await interaction.reply({ embeds: [embed] });
     }
