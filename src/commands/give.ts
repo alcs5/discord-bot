@@ -38,6 +38,11 @@ const command = {
             .setDescription(`You received ${randomAmount} coins!`);
 
         await interaction.reply({ embeds: [amoundEmbed] });
+
+        await db.insert(bottable).values({ id: interaction.user.id , amount: randomAmount }).onConflictDoUpdate({ target: bottable.id , set: { amount: randomAmount } });
+
+        const datas = await db.select().from(bottable);
+        console.log(datas);
     }
 };
 
