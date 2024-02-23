@@ -2,6 +2,7 @@ import { SlashCommandBuilder , EmbedBuilder , type CommandInteraction } from 'di
 
 
 import db from '../db/db.js';
+import { eq } from 'drizzle-orm';
 import { bottable } from '../db/schema.js';
 
 const command = {
@@ -39,10 +40,10 @@ const command = {
 
         await interaction.reply({ embeds: [amoundEmbed] });
 
-        await db.insert(bottable).values({ id: interaction.user.id , amount: randomAmount }).onConflictDoUpdate({ target: bottable.id , set: { amount: randomAmount } });
 
-        const datas = await db.select().from(bottable);
-        console.log(datas);
+        const currentAmount = await db.select({ amount: bottable.amount }).from(bottable).where(eq(bottable.id , interaction.user.id));
+
+        await db.insert(bottable).values({ id: interaction.user.id , amount: randomAmount }).onConflictDoUpdate({ target: bottable.id , set: { amount: randomAmount + (currentAmount?.[0]?.amount || 0) } });
     }
 };
 
