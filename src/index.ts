@@ -49,7 +49,7 @@ client.on(Events.InteractionCreate , async (interaction) => {
     if (!interaction.isChatInputCommand()) return;
 
     const { cooldowns } = interaction.client;
-    const cooldown_d = 1800;
+    const cooldown_d = 600;
 
     const command = interaction.client.commands.get(interaction.commandName) as Command;
 
