@@ -49,7 +49,6 @@ client.on(Events.InteractionCreate , async (interaction) => {
     if (!interaction.isChatInputCommand()) return;
 
     const { cooldowns } = interaction.client;
-    const cooldown_d = 600;
 
     const command = interaction.client.commands.get(interaction.commandName) as Command;
 
@@ -66,7 +65,7 @@ client.on(Events.InteractionCreate , async (interaction) => {
 
     const now = Date.now();
     const timestamps = cooldowns.get(command.data.name);
-    const cooldownAmount = cooldown_d * 1000;
+    const cooldownAmount = (command.cooldown || 0) * 1000;
 
     if (timestamps.has(interaction.user.id)) {
         const expirationTime = timestamps.get(interaction.user.id) + cooldownAmount;
