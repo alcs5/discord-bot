@@ -6,7 +6,7 @@ import { eq } from 'drizzle-orm';
 import { bottable } from '../db/schema.js';
 
 const command = {
-    cooldown: 1800,
+    cooldown: 600,
 
     data: new SlashCommandBuilder()
         .setName('give')
