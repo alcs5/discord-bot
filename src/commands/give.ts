@@ -43,7 +43,9 @@ const command = {
 
         const currentAmount = await db.select({ amount: bottable.amount }).from(bottable).where(eq(bottable.id , interaction.user.id));
 
-        await db.insert(bottable).values({ id: interaction.user.id , amount: randomAmount }).onConflictDoUpdate({ target: bottable.id , set: { amount: randomAmount + (currentAmount?.[0]?.amount || 0) } });
+        const rightAmount : number = currentAmount?.[0]?.amount || 0;
+
+        await db.insert(bottable).values({ id: interaction.user.id , amount: randomAmount }).onConflictDoUpdate({ target: bottable.id , set: { amount: randomAmount + rightAmount } });
     }
 };
 
