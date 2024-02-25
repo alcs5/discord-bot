@@ -50,7 +50,7 @@ client.on(Events.InteractionCreate , async (interaction) => {
 
     const { cooldowns } = interaction.client;
 
-    const command = interaction.client.commands.get(interaction.commandName) as Command;
+    const command : Command = interaction.client.commands.get(interaction.commandName);
 
     if (!command) {
         console.error(`No command matching ${interaction.commandName} was found.`);
