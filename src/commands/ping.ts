@@ -15,7 +15,7 @@ const command = {
         };
 
         const embed = new EmbedBuilder()
-            .setColor(0xEE0000)
+            .setColor(0x0000EE)
             .setTitle('Pong! 🏓')
             .setDescription(`Latency ${ping}`);
 
