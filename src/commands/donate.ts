@@ -22,6 +22,12 @@ const command = {
         const currentAmount = await db.select({ amount: bottable.amount }).from(bottable).where(eq(bottable.id , interaction.user.id));
         const rightAmount = currentAmount?.[0]?.amount || 0;
 
+
+        if (userTarget.id === interaction.user.id) {
+            await interaction.reply('You cannot give coins to yourself!');
+            return;
+        };
+        
         if (rightAmount < amountGiven || rightAmount === 0) {
             await interaction.reply('You do not have enough coins to donate!');
             return;
