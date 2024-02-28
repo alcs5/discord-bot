@@ -24,6 +24,11 @@ const command = {
             return;
         };
 
+        if (target.user.id === interaction.user.id) {
+            await interaction.reply({ content: 'You cannot ban yourself!' , ephemeral: true });
+            return;
+        };
+
         if (!reason) {
             await interaction.reply({ content: 'No reason provided!' , ephemeral: true });
             return;

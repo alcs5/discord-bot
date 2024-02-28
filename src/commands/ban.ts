@@ -1,4 +1,5 @@
 import { SlashCommandBuilder, EmbedBuilder, CommandInteraction, PermissionFlagsBits, PermissionsBitField , type ColorResolvable } from 'discord.js';
+import { int } from 'drizzle-orm/mysql-core';
 
 
 const command = {
@@ -21,6 +22,11 @@ const command = {
 
         if (!(interaction.member.permissions as Readonly<PermissionsBitField>).has(PermissionFlagsBits.BanMembers)) {
             await interaction.reply({ content: 'You are not allowed to use this command!' , ephemeral: true });
+            return;
+        };
+
+        if (target.user.id === interaction.user.id) {
+            await interaction.reply({ content: 'You cannot ban yourself!' , ephemeral: true });
             return;
         };
 
