@@ -41,7 +41,7 @@ const command = {
 
         await db.insert(bottable).values({ id : userTarget.id , amount: amountGiven }).onConflictDoUpdate({ target: bottable.id  , set : { amount : targetUserAmount + amountGiven } });
 
-        const embed = new EmbedBuilder().setTitle(`You gave ${amountGiven} coinst to ${userTarget.username}!`);
+        const embed = new EmbedBuilder().setColor(0x00CC00).setTitle(`You gave ${amountGiven} coinst to ${userTarget.username}!`);
 
 
         await interaction.reply({ embeds: [embed] });
