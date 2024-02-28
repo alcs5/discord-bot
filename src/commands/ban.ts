@@ -33,7 +33,7 @@ const command = {
             .setTitle(`User ${target.user.tag} has been banned!`);
         
         try {
-            await interaction.guild.members.ban(target.user , { reason });
+            await interaction.guild.members.ban(target.user.id , { reason });
             await interaction.reply({ embeds: [embed] });
         }
         catch (err) {
