@@ -25,7 +25,7 @@ const command = {
         };
 
         if (target.user.id === interaction.user.id) {
-            await interaction.reply({ content: 'You cannot ban yourself!' , ephemeral: true });
+            await interaction.reply({ content: 'You cannot kick yourself!' , ephemeral: true });
             return;
         };
 
