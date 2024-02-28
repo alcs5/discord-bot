@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, EmbedBuilder, CommandInteraction, PermissionFlagsBits, PermissionsBitField } from 'discord.js';
+import { SlashCommandBuilder, EmbedBuilder, CommandInteraction, PermissionFlagsBits, PermissionsBitField, ColorResolvable } from 'discord.js';
 
 
 const command = {
@@ -11,7 +11,8 @@ const command = {
         .addStringOption((option) => option
             .setName('reason').setDescription('what is the reason?').setRequired(true)
         )
-        .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers),
+        .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
+        .setDMPermission(true),
 
         
     execute: async(interaction: CommandInteraction) => {
@@ -28,17 +29,19 @@ const command = {
             return;
         };
 
-        const embed = new EmbedBuilder()
-            .setColor(0x00DD00)
-            .setTitle(`User ${target.user.tag} has been banned!`);
+            function embed(color : ColorResolvable , title : string) {
+                const embed = new EmbedBuilder().setColor(color).setTitle(title);
+                return embed;
+            };
         
         try {
             await interaction.guild.bans.remove(target.user.id , reason);
-            await interaction.reply({ embeds: [embed] });
+            await interaction.reply({ embeds: [embed(0xDD0000 , `User ${target.user.tag} has been unbanned!`)] });
+            await target.user.send({ embeds: [embed(0xDD0000 , `You have been unbanned from ${interaction.guild.name}!`)] });
         }
         catch (err) {
             console.log(err.message);
-            await interaction.reply({ content: 'There was an error banning the user' , ephemeral: true });
+            await interaction.reply({ content: 'There was an error unbanning the user' , ephemeral: true });
         };
 
         console.log(interaction.guild.bans);

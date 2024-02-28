@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, EmbedBuilder, CommandInteraction, PermissionFlagsBits, PermissionsBitField } from 'discord.js';
+import { SlashCommandBuilder, EmbedBuilder, CommandInteraction, PermissionFlagsBits, PermissionsBitField , type ColorResolvable } from 'discord.js';
 
 
 const command = {
@@ -11,7 +11,8 @@ const command = {
         .addStringOption((option) => option
             .setName('reason').setDescription('what is the reason?').setRequired(true)
         )
-        .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers),
+        .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers)
+        .setDMPermission(true),
 
         
     execute: async(interaction: CommandInteraction) => {
@@ -28,17 +29,19 @@ const command = {
             return;
         };
 
-        const embed = new EmbedBuilder()
-            .setColor(0xDD0000)
-            .setTitle(`User ${target.user.tag} has been kicked!`);
+        function embed(color : ColorResolvable , title : string) {
+            const embed = new EmbedBuilder().setColor(color).setTitle(title);
+            return embed;
+        };
         
         try {
             await interaction.guild.members.kick(target.user.id , reason);
-            await interaction.reply({ embeds: [embed] });
+            await interaction.reply({ embeds: [embed(0xDD0000 , `User ${target.user.tag} has been kicked!`)] });
+            await target.user.send({ embeds: [embed(0xDD0000 , `You have been kicked from the ${interaction.guild.name}`).setDescription(`Reason: ${reason}`)]});
         }
         catch (err) {
             console.log(err);
-            await interaction.reply({ content: 'There was an error banning the user' , ephemeral: true });
+            await interaction.reply({ content: 'There was an error kicking the user' , ephemeral: true });
         };
     }
 };
