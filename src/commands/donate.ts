@@ -33,13 +33,18 @@ const command = {
             return;
         };
 
+        if (amountGiven <= 0 ) {
+            await interaction.reply('You cannot give less than or 0 coins to someone!');
+            return;
+        };
+
         const targetUserAmounts = await db.select({ amount : bottable.amount }).from(bottable).where(eq(bottable.id , userTarget.id));
         const targetUserAmount = targetUserAmounts?.[0]?.amount || 0;
 
 
         await db.insert(bottable).values({ id : interaction.user.id , amount: rightAmount - amountGiven }).onConflictDoUpdate({ target : bottable.id , set : { amount: rightAmount - amountGiven }});
 
-        await db.insert(bottable).values({ id : userTarget.id , amount: amountGiven }).onConflictDoUpdate({ target: bottable.id  , set : { amount : targetUserAmount + (amountGiven > 0 ? 0 : amountGiven) } });
+        await db.insert(bottable).values({ id : userTarget.id , amount: amountGiven }).onConflictDoUpdate({ target: bottable.id  , set : { amount : targetUserAmount + amountGiven } });
 
         const embed = new EmbedBuilder().setColor(0x00CC00).setTitle(`You gave ${amountGiven} coins to ${userTarget.username}!`);
 
