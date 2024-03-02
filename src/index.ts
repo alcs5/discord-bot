@@ -93,7 +93,7 @@ client.on(Events.InteractionCreate , async (interaction) => {
 
 client.on(Events.MessageCreate , (message) => {
     if (!message.author.bot) {
-        console.log(`${message.author.globalName} said : ${message.content}`);
+        console.log(`${message.author.username} said : ${message.content}`);
     };
 });
 
