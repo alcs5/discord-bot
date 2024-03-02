@@ -39,9 +39,9 @@ const command = {
 
         await db.insert(bottable).values({ id : interaction.user.id , amount: rightAmount - amountGiven }).onConflictDoUpdate({ target : bottable.id , set : { amount: rightAmount - amountGiven }});
 
-        await db.insert(bottable).values({ id : userTarget.id , amount: amountGiven }).onConflictDoUpdate({ target: bottable.id  , set : { amount : targetUserAmount + amountGiven } });
+        await db.insert(bottable).values({ id : userTarget.id , amount: amountGiven }).onConflictDoUpdate({ target: bottable.id  , set : { amount : targetUserAmount + (amountGiven > 0 ? 0 : amountGiven) } });
 
-        const embed = new EmbedBuilder().setColor(0x00CC00).setTitle(`You gave ${amountGiven} coinst to ${userTarget.username}!`);
+        const embed = new EmbedBuilder().setColor(0x00CC00).setTitle(`You gave ${amountGiven} coins to ${userTarget.username}!`);
 
 
         await interaction.reply({ embeds: [embed] });
