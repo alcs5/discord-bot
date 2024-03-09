@@ -1,5 +1,4 @@
 import { SlashCommandBuilder, EmbedBuilder, CommandInteraction, PermissionFlagsBits, PermissionsBitField , type ColorResolvable } from 'discord.js';
-import { int } from 'drizzle-orm/mysql-core';
 
 
 const command = {
