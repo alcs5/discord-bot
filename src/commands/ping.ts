@@ -1,7 +1,6 @@
 import { SlashCommandBuilder , EmbedBuilder , type CommandInteraction } from 'discord.js';
 
 const command = {
-    cooldown : 60,
 
     data: new SlashCommandBuilder()
         .setName('ping')
