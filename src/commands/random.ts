@@ -18,6 +18,11 @@ const command = {
             const min = +interaction.options.get('min').value;
             const max = +interaction.options.get('max').value;
 
+            if (min > max) {
+                await interaction.reply('The minimun value cannot be bigger than the max one!');
+                return;
+            };
+
             const embed = new EmbedBuilder().setColor(0x0000aa).setTitle(`Your number is ${Math.floor(Math.random() * (max - min) + 1) + min}`);
 
             await interaction.reply({ embeds: [embed] });
