@@ -29,10 +29,10 @@ const command = {
             return;
         };
 
-            function embed(color : ColorResolvable , title : string) {
-                const embed = new EmbedBuilder().setColor(color).setTitle(title);
-                return embed;
-            };
+        function embed(color : ColorResolvable , title : string) {
+            const embed = new EmbedBuilder().setColor(color).setTitle(title);
+            return embed;
+        };
         
         try {
             await interaction.guild.bans.remove(target.user.id , reason);
